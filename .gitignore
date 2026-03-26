@@ -1,0 +1,6 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.vscode/
+investment_lab/__pycache__/
