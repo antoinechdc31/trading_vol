@@ -77,8 +77,8 @@ class AAPLOptionLoader(OptionLoader):
 
 def extract_spot_from_options(df_options: pd.DataFrame) -> pd.DataFrame:
     return (
-        df_options[["date", "spot"]]
-        .drop_duplicates(subset=["date"])
+        df_options.groupby("date")["spot"]
+        .median()   # 🔥 robuste aux outliers
+        .reset_index()
         .sort_values("date")
-        .reset_index(drop=True)
     )
