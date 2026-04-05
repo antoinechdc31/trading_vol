@@ -236,7 +236,7 @@ class DeltaHedgedOptionTrade(OptionTrade):
                         "option_id": x["ticker"].iloc[0],
                         "expiration": x["date"].iloc[0] + pd.offsets.BusinessDay(n=1),
                         "leg_name": "DELTA_HEDGING",
-                        "weight": -(x["delta"] * x["weight"]).sum(),
+                        "weight": (-(x["delta"]* (x["weight"]* x["spot"])).sum() / x["spot"].iloc[0]), # corréction du delta hedge
                     }
                 )
             )
